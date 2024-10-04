@@ -4,23 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>File Links</title>
-    <!-- Link to the external CSS file -->
+    <title>AutoCAD Electrical Documentations</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="container">
+<div class="login-container">
+    <h1>Login to Access Documents</h1>
+    <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <button type="submit">Login</button>
+        <p id="error-message" style="color:red;"></p>
+    </form>
+</div>
+
+<!-- Hidden document container, only shown after login -->
+<div class="container" id="document-container" style="display:none;">
     <h1>AutoCAD Electrical Documentations</h1>
     <p>Click the links below to view or download the associated PDF or DOCX files:</p>
-
-    <ul id="file-list">
-        <!-- Links will be generated here by JavaScript -->
-    </ul>
+    <ul id="file-list"></ul>
 </div>
 
 <script>
-    // List of files to display (you can add more files here)
+    // Hardcoded username and password (you can change these)
+    const validUsername = "ECC";  // Change this to your desired username
+    const validPassword = "LETMEINNOW";  // Change this to your desired password
+
+    // File list for documentation links
     const files = [
         { name: "Project Plan", url: "files/project_plan.pdf", type: "PDF" },
         { name: "Technical Specifications", url: "files/technical_specs.docx", type: "DOCX" },
@@ -28,17 +41,33 @@
         { name: "Engineering Report", url: "files/engineering_report.docx", type: "DOCX" }
     ];
 
-    // Function to create the file links dynamically
-    const fileList = document.getElementById('file-list');
+    // Function to handle login form submission
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+        e.preventDefault();
 
-    files.forEach(file => {
-        let listItem = document.createElement('li');
-        let link = document.createElement('a');
-        link.href = file.url;
-        link.textContent = `${file.name} (${file.type})`;
-        link.target = "_blank"; // Opens link in a new tab
-        listItem.appendChild(link);
-        fileList.appendChild(listItem);
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Check if the username and password are correct
+        if (username === validUsername && password === validPassword) {
+            document.querySelector('.login-container').style.display = 'none'; // Hide login form
+            document.getElementById('document-container').style.display = 'block'; // Show document list
+
+            // Create file links dynamically
+            const fileList = document.getElementById('file-list');
+            files.forEach(file => {
+                let listItem = document.createElement('li');
+                let link = document.createElement('a');
+                link.href = file.url;
+                link.textContent = `${file.name} (${file.type})`;
+                link.target = "_blank"; // Opens the link in a new tab
+                listItem.appendChild(link);
+                fileList.appendChild(listItem);
+            });
+        } else {
+            // Display error message if login fails
+            document.getElementById('error-message').textContent = "Invalid username or password.";
+        }
     });
 </script>
 
