@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>File Links</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Document Downloads</h1>
+    <p>Click the links below to view or download the associated PDF or DOCX files:</p>
+
+    <ul id="file-list">
+        <!-- Links will be generated here by JavaScript -->
+    </ul>
+</div>
+
+<script>
+    // List of files to display (you can add more files here)
+    const files = [
+        { name: "Project Plan", url: "files/project_plan.pdf", type: "PDF" },
+        { name: "Technical Specifications", url: "files/technical_specs.docx", type: "DOCX" },
+        { name: "User Guide", url: "files/user_guide.pdf", type: "PDF" },
+        { name: "Engineering Report", url: "files/engineering_report.docx", type: "DOCX" }
+    ];
+
+    // Function to create the file links dynamically
+    const fileList = document.getElementById('file-list');
+
+    files.forEach(file => {
+        let listItem = document.createElement('li');
+        let link = document.createElement('a');
+        link.href = file.url;
+        link.textContent = `${file.name} (${file.type})`;
+        link.target = "_blank"; // Opens link in a new tab
+        listItem.appendChild(link);
+        fileList.appendChild(listItem);
+    });
+</script>
+
+</body>
+</html>
