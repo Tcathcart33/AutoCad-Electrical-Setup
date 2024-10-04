@@ -62,11 +62,6 @@
                 link.textContent = `${file.name} (${file.type})`;
                 link.target = "_blank"; // Opens the link in a new tab
 
-                // Add an automatic click to open the first file
-                if (index === 0) {
-                    link.click(); // Automatically open the first file
-                }
-
                 listItem.appendChild(link);
                 fileList.appendChild(listItem);
             });
