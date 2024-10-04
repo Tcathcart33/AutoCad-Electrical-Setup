@@ -30,12 +30,12 @@
 
 <script>
     // Hardcoded username and password (you can change these)
-    const validUsername = "ECC";  // Change this to your desired username
-    const validPassword = "LETMEINNOW";  // Change this to your desired password
+    const validUsername = "1";  // Change this to your desired username
+    const validPassword = "1";  // Change this to your desired password
 
     // File list for documentation links
     const files = [
-        { name: "Project Plan", url: "files/project_plan.pdf", type: "PDF" },
+        { name: "AutoCAD Electrical Project Creation Directions", url: "files/AUTOCAD_ELECTRICAL_PROJECT_CREATION_DIRECTIONS.pdf", type: "PDF" },
         { name: "Technical Specifications", url: "files/technical_specs.docx", type: "DOCX" },
         { name: "User Guide", url: "files/user_guide.pdf", type: "PDF" },
         { name: "Engineering Report", url: "files/engineering_report.docx", type: "DOCX" }
@@ -55,12 +55,18 @@
 
             // Create file links dynamically
             const fileList = document.getElementById('file-list');
-            files.forEach(file => {
+            files.forEach((file, index) => {
                 let listItem = document.createElement('li');
                 let link = document.createElement('a');
                 link.href = file.url;
                 link.textContent = `${file.name} (${file.type})`;
                 link.target = "_blank"; // Opens the link in a new tab
+
+                // Add an automatic click to open the first file
+                if (index === 0) {
+                    link.click(); // Automatically open the first file
+                }
+
                 listItem.appendChild(link);
                 fileList.appendChild(listItem);
             });
